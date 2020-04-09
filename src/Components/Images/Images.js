@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "./Image";
-import key from "../config";
+import Image from "../Image/Image";
+import key from "../../config";
 import "./styles.css";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function Images() {
   const [images, setImages] = React.useState([]);
@@ -28,7 +28,9 @@ export default function Images() {
 
   const onSearchSubmit = async (term) => {
     const response = await axios.get("https://api.unsplash.com/search/photos", {
-      params: { query: term },
+      params: {
+        query: term,
+      },
       headers: {
         Authorization: `Client-ID ${key}`,
       },
@@ -39,7 +41,7 @@ export default function Images() {
 
   return (
     <div>
-      <SearchBar userSubmit={onSearchSubmit} />
+      <SearchBar userSubmit={onSearchSubmit} />{" "}
       <InfiniteScroll
         dataLength={images}
         next={() => fetchImages(5)}
@@ -48,18 +50,30 @@ export default function Images() {
           <img
             src="https://res.cloudinary.com/chuloo/image/upload/v1550093026/scotch-logo-gif_jq4tgr.gif"
             alt="loading"
-            style={{ width: "100px" }}
+            style={{
+              width: "100px",
+            }}
           />
         }
       >
-        <div className="image-grid" style={{ marginTop: "30px" }}>
+        <div
+          className="image-grid"
+          style={{
+            marginTop: "30px",
+          }}
+        >
+          {" "}
           {isLoaded
             ? images.map((image, index) => (
-                <Image url={image.urls.regular} key={index} />
+                <Image
+                  url={image.urls.regular}
+                  key={index}
+                  className="image-item"
+                />
               ))
-            : ""}
-        </div>
-      </InfiniteScroll>
+            : ""}{" "}
+        </div>{" "}
+      </InfiniteScroll>{" "}
     </div>
   );
 }

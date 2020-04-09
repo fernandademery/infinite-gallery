@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Images from "../src/Components/Images";
+import Images from "./Components/Images/Images";
 
 function App() {
   return (

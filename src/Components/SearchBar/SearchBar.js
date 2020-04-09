@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles.css";
 
 export default function SearchBar(props) {
   const [val, setVal] = useState("");
@@ -13,18 +14,18 @@ export default function SearchBar(props) {
   };
 
   return (
-    <div>
-      <form onSubmit={onFormSubmit} className="flexContainer">
-        <label>
-          <h2>Image Search: </h2>
-        </label>
+    <div data-testid="search-bar">
+      <form onSubmit={onFormSubmit} className="flex-container">
+        <h2 className="flex-item"> Scroll down or </h2>
+
         <input
-          className="inputStyle"
+          className="input-style flex-item"
           type="text"
           value={val}
           onChange={onInputChange}
+          placeholder="type something here"
         />
-      </form>
+      </form>{" "}
     </div>
   );
 }
