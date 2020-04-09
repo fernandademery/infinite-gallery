@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../Image/Image";
-import key from "../../config";
 import "./styles.css";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -12,7 +11,7 @@ export default function Images() {
 
   const fetchImages = (count = 10) => {
     const apiRoot = "https://api.unsplash.com";
-    const accessKey = key;
+    const accessKey = process.env.REACT_APP_APIKEY;
 
     axios
       .get(`${apiRoot}/photos/random?client_id=${accessKey}&count=${count}`)
@@ -32,7 +31,7 @@ export default function Images() {
         query: term,
       },
       headers: {
-        Authorization: `Client-ID ${key}`,
+        Authorization: `Client-ID ${process.env.REACT_APP_APIKEY}`,
       },
     });
 
